@@ -1,0 +1,34 @@
+    .text-field {
+        -fx-border-radius: 3;
+        -fx-background-color: white;
+        -fx-background-radius: 5;
+        -fx-accent: #767676;
+        }
+    .text-field:focused {
+        -fx-border-radius: 3;
+        -fx-background-color: white;
+        -fx-background-radius: 5;
+        -fx-background-insets: 0;
+        }
+    .button {
+        -fx-background-insets: 0;
+        -fx-border-color: #c8c8c8;
+        }
+    .tree-view {
+        -fx-font-family: 'Alegreya Sans SC';
+        -fx-font-weight: 700;
+        -fx-border-color: white;
+    }
+    #workoutsSplitPane {
+        -fx-border-color: #c8c8c8 transparent transparent #f4f4f4;
+    }
+    #hBox {
+        -fx-background-color: white;
+        -fx-border-color: #c8c8c8 transparent transparent transparent;
+    }
+    .workoutsLabel {
+        -fx-border-color: #c8c8c8;
+        -fx-border-radius: 3;
+        -fx-background-color: white;
+        -fx-background-radius: 5;
+    }

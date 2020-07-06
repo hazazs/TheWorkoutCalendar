@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Fri Jun 19 22:17:25 CEST 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0172-ce3a-976c-000006622aa8 
-on database directory C:\Users\hazázs\Documents\NetBeansProjects\Insanity\InsanityDataBase with class loader sun.misc.Launcher$AppClassLoader@55f96302 
-Loaded from file:/C:/Users/haz%c3%a1zs/Documents/NetBeansProjects/Insanity/dist/run626347028/lib/derby.jar
+Tue Sep 01 12:27:08 CEST 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0174-4934-c246-00000664b3b8 
+on database directory C:\Users\hazázs\Documents\NetBeansProjects\TheWorkoutCalendar\TheWorkoutCalendarDataBase with class loader sun.misc.Launcher$AppClassLoader@55f96302 
+Loaded from file:/C:/Users/haz%c3%a1zs/Documents/NetBeansProjects/TheWorkoutCalendar/dist/run1128809867/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_202-b08
-user.dir=C:\Users\hazázs\Documents\NetBeansProjects\Insanity
+user.dir=C:\Users\hazázs\Documents\NetBeansProjects\TheWorkoutCalendar
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

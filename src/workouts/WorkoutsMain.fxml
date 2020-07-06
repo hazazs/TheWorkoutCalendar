@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="workouts.WorkoutsMainController">
+   <children>
+      <SplitPane fx:id="splitPane" dividerPositions="0.15" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane>
+               <children>
+                  <StackPane fx:id="menuPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children></AnchorPane>
+          <AnchorPane>
+               <children>
+                  <Pane fx:id="statisticsPane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0" />
+                  <Pane fx:id="workoutsPane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+                     <children>
+                        <SplitPane fx:id="workoutsSplitPane" dividerPositions="0.177" prefHeight="779.0" prefWidth="1361.0">
+                          <items>
+                            <AnchorPane>
+                                 <children>
+                                    <StackPane fx:id="workoutsMenuPane" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <HBox fx:id="hBox" alignment="CENTER" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="705.0">
+                                       <children>
+                                          <Button focusTraversable="false" mnemonicParsing="false" onAction="#newButton" prefWidth="80.0" text="NEW.." />
+                                          <Button fx:id="deleteButton" focusTraversable="false" mnemonicParsing="false" onAction="#deleteButton" prefWidth="80.0" text="DELETE" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane>
+                                 <children>
+                                    <Pane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <ImageView fitHeight="778.0" fitWidth="1116.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../workoutsBackground.png" />
+                                             </image>
+                                          </ImageView>
+                                          <VBox fx:id="workoutFields" alignment="TOP_RIGHT" layoutX="50.0" layoutY="244.0" prefWidth="300.0" spacing="100.0">
+                                             <children>
+                                                <TextField fx:id="workoutName" focusTraversable="false">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField fx:id="workoutLength" focusTraversable="false">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Button focusTraversable="false" mnemonicParsing="false" onAction="#saveButton" prefWidth="80.0" text="SAVE" />
+                                             </children>
+                                          </VBox>
+                                          <Label fx:id="labelName" layoutX="52.0" layoutY="225.0" styleClass="workoutsLabel" text=" Workout name ">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font></Label>
+                                          <Label fx:id="labelLength" layoutX="52.0" layoutY="357.0" styleClass="workoutsLabel" text=" Workout length (in minutes) ">
+                                             <font>
+                                                <Font size="10.0" />
+                                             </font></Label>
+                                          <ImageView fx:id="hintIconA" fitHeight="32.0" layoutX="363.0" layoutY="244.0" onMouseEntered="#showNameHint" onMouseExited="#hideHint" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../hintIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="hintIconB" fitHeight="32.0" layoutX="363.0" layoutY="376.0" onMouseEntered="#showLengthHint" onMouseExited="#hideHint" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../hintIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Label fx:id="hintLabel" layoutX="61.0" layoutY="109.0" prefHeight="27.0" prefWidth="500.0" style="-fx-background-color: transparent;" textFill="RED" visible="false">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children></Pane>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children></Pane>
+                  <Pane fx:id="calendarPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0" />
+                  <StackPane fx:id="logoPane" onMouseClicked="#setLogo" AnchorPane.bottomAnchor="778.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
