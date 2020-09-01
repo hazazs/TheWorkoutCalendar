@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Tue Sep 01 12:27:08 CEST 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0174-4934-c246-00000664b3b8 
+Wed Sep 02 21:05:09 CEST 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0174-5035-609a-0000066067c0 
 on database directory C:\Users\hazázs\Documents\NetBeansProjects\TheWorkoutCalendar\TheWorkoutCalendarDataBase with class loader sun.misc.Launcher$AppClassLoader@55f96302 
-Loaded from file:/C:/Users/haz%c3%a1zs/Documents/NetBeansProjects/TheWorkoutCalendar/dist/run1128809867/lib/derby.jar
+Loaded from file:/C:/Users/haz%c3%a1zs/Documents/NetBeansProjects/TheWorkoutCalendar/dist/run1700342936/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_202-b08
 user.dir=C:\Users\hazázs\Documents\NetBeansProjects\TheWorkoutCalendar
