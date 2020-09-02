@@ -1,4 +1,4 @@
-package workouts;
+package calendar;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import static workouts.WorkoutsMainController.dataBase;
+import static calendar.WorkoutsMainController.dataBase;
 
 public class WorkoutsController implements Initializable, SplitPaneDividerController {
     @FXML

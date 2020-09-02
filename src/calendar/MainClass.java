@@ -1,4 +1,4 @@
-package workouts;
+package calendar;
 
 import java.io.IOException;
 import javafx.application.Application;

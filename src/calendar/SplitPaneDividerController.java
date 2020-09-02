@@ -1,4 +1,4 @@
-package workouts;
+package calendar;
 
 import javafx.scene.control.SplitPane;
 

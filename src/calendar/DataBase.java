@@ -1,4 +1,4 @@
-package workouts;
+package calendar;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
