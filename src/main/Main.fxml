@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="calendar.WorkoutsMainController">
+<AnchorPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.MainController">
     <children>
         <SplitPane fx:id="splitPane" dividerPositions="0.15" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -20,9 +20,9 @@
                 </AnchorPane>
                 <AnchorPane>
                     <children>
-                        <Pane fx:id="statisticsPane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0"/>
+                        <fx:include source="Statistics.fxml" fx:id="statisticsMenu"/>
                         <fx:include source="Workouts.fxml" fx:id="workoutsMenu"/>
-                        <Pane fx:id="calendarPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0"/>
+                        <fx:include source="Calendar.fxml" fx:id="calendarMenu"/>
                         <StackPane fx:id="logoPane" onMouseClicked="#setLogo" AnchorPane.bottomAnchor="778.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
                     </children>
                 </AnchorPane>

@@ -1,4 +1,4 @@
-package calendar;
+package main;
 
 import java.io.IOException;
 import javafx.application.Application;
@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class MainClass extends Application {
     private Parent anchorPane;
-    private final String fxml = "WorkoutsMain.fxml";
+    private final String fxml = "Main.fxml";
     @Override
     public void start(Stage stage) {       
         try {

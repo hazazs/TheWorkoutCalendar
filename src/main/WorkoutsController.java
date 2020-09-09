@@ -1,4 +1,4 @@
-package calendar;
+package main;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,15 +23,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import static calendar.WorkoutsMainController.dataBase;
+import static main.MainController.dataBase;
 
-public class WorkoutsController implements Initializable, SplitPaneDividerController {
+public class WorkoutsController implements Initializable {
     @FXML
-    private Label labelName, labelLength, hintLabel;
+    protected SplitPane workoutsSplitPane;
     @FXML
-    private VBox workoutFields;
-    @FXML
-    private ImageView hintIconA, hintIconB;
+    protected Pane workoutsPane;
     @FXML
     private StackPane workoutsMenuPane, alertBackgroundPane, alertPane;
     protected TreeView<String> treeViewWorkouts;
@@ -43,16 +41,11 @@ public class WorkoutsController implements Initializable, SplitPaneDividerContro
     @FXML
     protected Button deleteButton;
     @FXML
-    private SplitPane workoutsSplitPane;
+    private Label labelName, labelLength, hintLabel;
     @FXML
-    protected Pane workoutsPane;
-    public void setVisibility(boolean b) {
-        labelName.setVisible(b);
-        labelLength.setVisible(b);
-        workoutFields.setVisible(b);
-        hintIconA.setVisible(b);
-        hintIconB.setVisible(b);
-    }
+    private VBox workoutFields;
+    @FXML
+    private ImageView hintIconA, hintIconB;
     public void setUpWorkoutsMenu() {
         if (!workoutsMenuPane.getChildren().isEmpty())
             workoutsMenuPane.getChildren().remove(0);
@@ -79,6 +72,13 @@ public class WorkoutsController implements Initializable, SplitPaneDividerContro
             workoutsMenuPane.requestFocus();
         });
     }
+    public void setVisibility(boolean b) {
+        labelName.setVisible(b);
+        labelLength.setVisible(b);
+        workoutFields.setVisible(b);
+        hintIconA.setVisible(b);
+        hintIconB.setVisible(b);
+    }
     public void setUpTabKeyPress(TextField from, TextField to) {
         from.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.TAB) {
@@ -86,17 +86,6 @@ public class WorkoutsController implements Initializable, SplitPaneDividerContro
                 event.consume();
             }
         });
-    }
-    public void showNameHint() {
-        hintLabel.setText("Workout name must be unique and at least one character.");
-        hintLabel.setVisible(true);
-    }
-    public void showLengthHint() {
-        hintLabel.setText("Workout length must be numeric and at least one minute.");
-        hintLabel.setVisible(true);
-    }
-    public void hideHint() {
-        hintLabel.setVisible(false);
     }
     public void newButton() {
         treeViewWorkouts.getSelectionModel().clearSelection();
@@ -111,57 +100,6 @@ public class WorkoutsController implements Initializable, SplitPaneDividerContro
     }
     public void deleteButton() {
         popUp("delete");
-    }
-    public boolean validName() {
-        boolean duplicate = workouts.containsKey(workoutName.getText());
-        return !(workoutName.getText().length() == 0 || (isNew && duplicate) || (!isNew && duplicate && !workoutName.getText().equals(selectedMenuItem)));
-    }
-    public boolean validLength() {
-        try {
-            return Integer.parseInt(workoutLength.getText()) >= 1;
-        } catch (NumberFormatException ex) {
-            return false;
-          }
-    }
-    public void saveButton() {
-        workoutName.setStyle("-fx-border-color: c8c8c8");
-        workoutLength.setStyle("-fx-border-color: c8c8c8");
-        if (validName() && validLength()) {
-            if (isNew) {
-                dataBase.Crud(workoutName.getText(), Integer.parseInt(workoutLength.getText()));
-                setVisibility(false);
-                setUpWorkoutsMenu();
-            } else {
-                if (!(selectedMenuItem.equals(workoutName.getText()) && String.valueOf(workouts.get(selectedMenuItem)).equals(workoutLength.getText()))) {
-                    dataBase.crUd(selectedMenuItem, workoutName.getText(), Integer.parseInt(workoutLength.getText()));
-                    setUpWorkoutsMenu();
-                    treeViewWorkouts.getSelectionModel().select(new ArrayList<>(workouts.keySet()).indexOf(workoutName.getText()));
-                    popUp("update");
-                } else workoutsMenuPane.requestFocus();
-              }
-        } else {
-            if (!validName()) {
-                workoutName.setStyle("-fx-border-color: red");
-                workoutName.requestFocus();
-                if (!validLength())
-                    workoutLength.setStyle("-fx-border-color: red");
-            } else {
-                workoutLength.setStyle("-fx-border-color: red");
-                workoutLength.requestFocus();
-              }
-          }
-    }
-    public void btnAction(Button btn) {
-        btn.setOnAction(event -> {
-            setAlert(false);
-            if (btn.getText().equals("YES")) {
-                dataBase.cruD(selectedMenuItem);
-                setVisibility(false);
-                deleteButton.setDisable(true);
-                setUpWorkoutsMenu();
-            }
-            event.consume();
-        });
     }
     public void popUp(String popUp) {
         VBox vBox;
@@ -193,13 +131,74 @@ public class WorkoutsController implements Initializable, SplitPaneDividerContro
         alertPane.getChildren().add(vBox);
         setAlert(true);
     }
+    public void btnAction(Button btn) {
+        btn.setOnAction(event -> {
+            setAlert(false);
+            if (btn.getText().equals("YES")) {
+                dataBase.cruD(selectedMenuItem);
+                setVisibility(false);
+                deleteButton.setDisable(true);
+                setUpWorkoutsMenu();
+            }
+            event.consume();
+        });
+    }
     public void setAlert(boolean b) {
         alertBackgroundPane.setVisible(b);
         alertPane.setVisible(b);
     }
+    public void saveButton() {
+        workoutName.setStyle("-fx-border-color: c8c8c8");
+        workoutLength.setStyle("-fx-border-color: c8c8c8");
+        if (validName() && validLength()) {
+            if (isNew) {
+                dataBase.Crud(workoutName.getText(), Integer.parseInt(workoutLength.getText()));
+                setVisibility(false);
+                setUpWorkoutsMenu();
+            } else {
+                if (!(selectedMenuItem.equals(workoutName.getText()) && String.valueOf(workouts.get(selectedMenuItem)).equals(workoutLength.getText()))) {
+                    dataBase.crUd(selectedMenuItem, workoutName.getText(), Integer.parseInt(workoutLength.getText()));
+                    setUpWorkoutsMenu();
+                    treeViewWorkouts.getSelectionModel().select(new ArrayList<>(workouts.keySet()).indexOf(workoutName.getText()));
+                    popUp("update");
+                } else workoutsMenuPane.requestFocus();
+              }
+        } else {
+            if (!validName()) {
+                workoutName.setStyle("-fx-border-color: red");
+                workoutName.requestFocus();
+                if (!validLength())
+                    workoutLength.setStyle("-fx-border-color: red");
+            } else {
+                workoutLength.setStyle("-fx-border-color: red");
+                workoutLength.requestFocus();
+              }
+          }
+    }
+    public boolean validName() {
+        boolean duplicate = workouts.containsKey(workoutName.getText());
+        return !(workoutName.getText().length() == 0 || (isNew && duplicate) || (!isNew && duplicate && !workoutName.getText().equals(selectedMenuItem)));
+    }
+    public boolean validLength() {
+        try {
+            return Integer.parseInt(workoutLength.getText()) >= 1;
+        } catch (NumberFormatException ex) {
+            return false;
+          }
+    }
+    public void showNameHint() {
+        hintLabel.setText("Workout name must be unique and at least one character.");
+        hintLabel.setVisible(true);
+    }
+    public void showLengthHint() {
+        hintLabel.setText("Workout length must be numeric and at least one minute.");
+        hintLabel.setVisible(true);
+    }
+    public void hideHint() {
+        hintLabel.setVisible(false);
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        disableSplitPaneDivider(workoutsSplitPane, 0.177);
         setUpWorkoutsMenu();
         setUpTabKeyPress(workoutName, workoutLength);
         setUpTabKeyPress(workoutLength, workoutName);

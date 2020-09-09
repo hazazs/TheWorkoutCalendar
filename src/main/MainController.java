@@ -1,4 +1,4 @@
-package calendar;
+package main;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -19,19 +19,68 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import org.apache.commons.io.FileUtils;
 
-public class WorkoutsMainController implements Initializable, SplitPaneDividerController {
+public class MainController implements Initializable {
     protected static final DataBase dataBase = new DataBase();
     @FXML
+    private CalendarController calendarMenuController;
+    @FXML
     private WorkoutsController workoutsMenuController;
-    private boolean first = true;
-    private String logoName;
     @FXML
-    private StackPane logoPane, menuPane;
-    private final List<Pane> panes = new ArrayList<>();
-    @FXML
-    private Pane calendarPane, statisticsPane;
+    private StatisticsController statisticsMenuController;
     @FXML
     private SplitPane splitPane;
+    private final List<Pane> panes = new ArrayList<>();
+    @FXML
+    private StackPane menuPane, logoPane;
+    private boolean first = true;
+    private String logoName;
+    public void disableSplitPaneDivider(SplitPane splitPane, double pos) {
+        splitPane.getDividers().get(0).positionProperty().addListener((observable, oldValue, newValue) -> splitPane.getDividers().get(0).setPosition(pos));
+    }
+    public void setUpMainMenu() {
+        TreeItem<String> mainMenu = new TreeItem<>("Menu");
+        TreeView<String> treeViewMain = new TreeView<>(mainMenu);
+        treeViewMain.setShowRoot(false);
+        treeViewMain.setStyle("-fx-font-size:30");
+        treeViewMain.setFocusTraversable(false);
+        treeViewMain.setPadding(new Insets(50, 0, 0, 0));
+        TreeItem<String> calendarMenu = new TreeItem<>("Calendar", icon("/calendarIcon.png"));
+        panes.add(calendarMenuController.calendarPane);
+        TreeItem<String> workoutsMenu = new TreeItem<>("Workouts", icon("/workoutsIcon.png"));
+        panes.add(workoutsMenuController.workoutsPane);
+        TreeItem<String> statisticsMenu = new TreeItem<>("Statistics", icon("/statisticsIcon.png"));
+        panes.add(statisticsMenuController.statisticsPane);
+        TreeItem<String> exitMenu = new TreeItem<>("Exit", icon("/exitIcon.png"));
+        mainMenu.getChildren().addAll(calendarMenu, workoutsMenu, statisticsMenu, exitMenu);
+        menuPane.getChildren().add(treeViewMain);
+        treeViewMain.getSelectionModel().selectFirst();
+        treeViewMain.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            switch (newValue.getValue()) {
+                case "Calendar" :
+                    setUpActivePane(calendarMenuController.calendarPane);
+                    break;
+                case "Workouts" :
+                    workoutsMenuController.setAlert(false);
+                    setUpActivePane(workoutsMenuController.workoutsPane);
+                    workoutsMenuController.treeViewWorkouts.getSelectionModel().clearSelection();
+                    workoutsMenuController.deleteButton.setDisable(true);
+                    workoutsMenuController.setVisibility(false);
+                    break;
+                case "Statistics" :
+                    setUpActivePane(statisticsMenuController.statisticsPane);
+                    break;
+                case "Exit" :
+                    System.exit(0);
+                    break;
+            }
+        });
+    }
+    public ImageView icon(String icon) {
+        return new ImageView(new Image(getClass().getResourceAsStream(icon)));
+    }
+    public void setUpActivePane(Pane pane) {
+        panes.forEach(p -> p.setVisible(p == pane ? true : false));
+    }
     public void setLogo() {
         try {
             if (first) logoName = FileUtils.readFileToString(new File("default.txt"), StandardCharsets.UTF_8);
@@ -57,54 +106,11 @@ public class WorkoutsMainController implements Initializable, SplitPaneDividerCo
             System.out.println(ex);
           }
     }
-    public ImageView icon(String icon) {
-        return new ImageView(new Image(getClass().getResourceAsStream(icon)));
-    }
-    public void setUpActivePane(Pane pane) {
-        panes.forEach(p -> p.setVisible(p == pane ? true : false));
-    }
-    public void setUpMainMenu() {
-        TreeItem<String> mainMenu = new TreeItem<>("Menu");
-        TreeView<String> treeViewMain = new TreeView<>(mainMenu);
-        treeViewMain.setShowRoot(false);
-        treeViewMain.setStyle("-fx-font-size:30");
-        treeViewMain.setFocusTraversable(false);
-        treeViewMain.setPadding(new Insets(50, 0, 0, 0));
-        TreeItem<String> calendarMenu = new TreeItem<>("Calendar", icon("/calendarIcon.png"));
-        panes.add(calendarPane);
-        TreeItem<String> workoutsMenu = new TreeItem<>("Workouts", icon("/workoutsIcon.png"));
-        panes.add(workoutsMenuController.workoutsPane);
-        TreeItem<String> statisticsMenu = new TreeItem<>("Statistics", icon("/statisticsIcon.png"));
-        panes.add(statisticsPane);
-        TreeItem<String> exitMenu = new TreeItem<>("Exit", icon("/exitIcon.png"));
-        mainMenu.getChildren().addAll(calendarMenu, workoutsMenu, exitMenu);
-        menuPane.getChildren().add(treeViewMain);
-        treeViewMain.getSelectionModel().selectFirst();
-        treeViewMain.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            switch (newValue.getValue()) {
-                case "Calendar" :
-                    setUpActivePane(calendarPane);
-                    break;
-                case "Workouts" :
-                    workoutsMenuController.setAlert(false);
-                    setUpActivePane(workoutsMenuController.workoutsPane);
-                    workoutsMenuController.treeViewWorkouts.getSelectionModel().clearSelection();
-                    workoutsMenuController.deleteButton.setDisable(true);
-                    workoutsMenuController.setVisibility(false);
-                    break;
-                case "Statistics" :
-                    setUpActivePane(statisticsPane);
-                    break;
-                case "Exit" :
-                    System.exit(0);
-                    break;
-            }
-        });
-    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        setLogo();
         disableSplitPaneDivider(splitPane, 0.1525);
         setUpMainMenu();
+        setLogo();
+        disableSplitPaneDivider(workoutsMenuController.workoutsSplitPane, 0.177);
     }
 }
