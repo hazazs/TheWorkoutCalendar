@@ -8,13 +8,13 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="workoutsPane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="main.WorkoutsController">
+<Pane fx:id="workoutsPane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.workouts.WorkoutsController">
     <children>
         <SplitPane fx:id="workoutsSplitPane" dividerPositions="0.177" prefHeight="779.0" prefWidth="1361.0">
             <items>
                 <AnchorPane>
                     <children>
-                        <StackPane fx:id="workoutsMenuPane" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                        <StackPane fx:id="workoutsMenuPane" alignment="TOP_CENTER" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
                         <HBox fx:id="hBox" alignment="CENTER" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="705.0">
                             <children>
                                 <Button focusTraversable="false" mnemonicParsing="false" onAction="#newButton" prefWidth="80.0" text="NEW.."/>
@@ -29,7 +29,7 @@
                             <children>
                                 <ImageView fitHeight="778.0" fitWidth="1116.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../workoutsBackground.png"/>
+                                        <Image url="@../../workoutsBackground.png"/>
                                     </image>
                                 </ImageView>
                                 <VBox fx:id="workoutFields" alignment="TOP_RIGHT" layoutX="50.0" layoutY="244.0" prefWidth="300.0" spacing="100.0">
@@ -59,12 +59,12 @@
                                 </Label>
                                 <ImageView fx:id="hintIconA" fitHeight="32.0" layoutX="363.0" layoutY="244.0" onMouseEntered="#showNameHint" onMouseExited="#hideHint" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../hintIcon.png"/>
+                                        <Image url="@../../hintIcon.png"/>
                                     </image>
                                 </ImageView>
                                 <ImageView fx:id="hintIconB" fitHeight="32.0" layoutX="363.0" layoutY="376.0" onMouseEntered="#showLengthHint" onMouseExited="#hideHint" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../hintIcon.png"/>
+                                        <Image url="@../../hintIcon.png"/>
                                     </image>
                                 </ImageView>
                                 <Label fx:id="hintLabel" layoutX="61.0" layoutY="109.0" prefHeight="27.0" prefWidth="500.0" style="-fx-background-color: transparent;" textFill="RED" visible="false">

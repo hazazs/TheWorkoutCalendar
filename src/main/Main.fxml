@@ -20,9 +20,9 @@
                 </AnchorPane>
                 <AnchorPane>
                     <children>
-                        <fx:include source="Statistics.fxml" fx:id="statisticsMenu"/>
-                        <fx:include source="Workouts.fxml" fx:id="workoutsMenu"/>
-                        <fx:include source="Calendar.fxml" fx:id="calendarMenu"/>
+                        <fx:include source="statistics/Statistics.fxml" fx:id="statisticsMenu"/>
+                        <fx:include source="workouts/Workouts.fxml" fx:id="workoutsMenu"/>
+                        <fx:include source="calendar/Calendar.fxml" fx:id="calendarMenu"/>
                         <StackPane fx:id="logoPane" onMouseClicked="#setLogo" AnchorPane.bottomAnchor="778.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
                     </children>
                 </AnchorPane>

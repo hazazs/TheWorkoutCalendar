@@ -13,14 +13,24 @@
     .button {
         -fx-background-insets: 0;
         -fx-border-color: #c8c8c8;
+        -fx-cursor: hand;
         }
     .tree-view {
         -fx-font-family: 'Alegreya Sans SC';
         -fx-font-weight: 700;
         -fx-border-color: white;
     }
+    .tree-cell {
+        -fx-cursor: hand;
+    }
+    #logoPane {
+        -fx-cursor: hand;
+    }
     #workoutsSplitPane {
         -fx-border-color: #c8c8c8 transparent transparent #f4f4f4;
+    }
+    #workoutsMenuPane {
+        -fx-background-color: white;
     }
     #hBox {
         -fx-background-color: white;

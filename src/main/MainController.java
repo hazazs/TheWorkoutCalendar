@@ -1,5 +1,9 @@
 package main;
 
+import main.workouts.WorkoutsController;
+import main.statistics.StatisticsController;
+import main.calendar.CalendarController;
+import main.database.DataBase;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.URL;
@@ -18,9 +22,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class MainController implements Initializable {
-    protected static final DataBase dataBase = new DataBase();
+    public static final DataBase dataBase = new DataBase();
+    public static final Log log = LogFactory.getLog(MainController.class);
     @FXML
     private CalendarController calendarMenuController;
     @FXML
@@ -34,8 +41,9 @@ public class MainController implements Initializable {
     private StackPane menuPane, logoPane;
     private boolean first = true;
     private String logoName;
-    public void disableSplitPaneDivider(SplitPane splitPane, double pos) {
-        splitPane.getDividers().get(0).positionProperty().addListener((observable, oldValue, newValue) -> splitPane.getDividers().get(0).setPosition(pos));
+    public void disableSplitPaneDividers(SplitPane sp1, double pos1, SplitPane sp2, double pos2) {
+        sp1.getDividers().get(0).positionProperty().addListener((observable, oldValue, newValue) -> sp1.getDividers().get(0).setPosition(pos1));
+        sp2.getDividers().get(0).positionProperty().addListener((observable, oldValue, newValue) -> sp2.getDividers().get(0).setPosition(pos2));
     }
     public void setUpMainMenu() {
         TreeItem<String> mainMenu = new TreeItem<>("Menu");
@@ -43,7 +51,7 @@ public class MainController implements Initializable {
         treeViewMain.setShowRoot(false);
         treeViewMain.setStyle("-fx-font-size:30");
         treeViewMain.setFocusTraversable(false);
-        treeViewMain.setPadding(new Insets(50, 0, 0, 0));
+        treeViewMain.setPadding(new Insets(50, 0, 640, 0));
         TreeItem<String> calendarMenu = new TreeItem<>("Calendar", icon("/calendarIcon.png"));
         panes.add(calendarMenuController.calendarPane);
         TreeItem<String> workoutsMenu = new TreeItem<>("Workouts", icon("/workoutsIcon.png"));
@@ -103,14 +111,13 @@ public class MainController implements Initializable {
             logoPane.getChildren().add(iw);
             if (first) first = false;
         } catch (Exception ex) {
-            System.out.println(ex);
+            log.error("Something went wrong while trying to set the logo: " + ex);
           }
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        disableSplitPaneDivider(splitPane, 0.1525);
+        disableSplitPaneDividers(splitPane, 0.1525, workoutsMenuController.workoutsSplitPane, 0.177);
         setUpMainMenu();
         setLogo();
-        disableSplitPaneDivider(workoutsMenuController.workoutsSplitPane, 0.177);
     }
 }

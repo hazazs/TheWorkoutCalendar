@@ -1,4 +1,4 @@
-package main;
+package main.workouts;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,19 +27,19 @@ import static main.MainController.dataBase;
 
 public class WorkoutsController implements Initializable {
     @FXML
-    protected SplitPane workoutsSplitPane;
+    public SplitPane workoutsSplitPane;
     @FXML
-    protected Pane workoutsPane;
+    public Pane workoutsPane;
     @FXML
     private StackPane workoutsMenuPane, alertBackgroundPane, alertPane;
-    protected TreeView<String> treeViewWorkouts;
+    public TreeView<String> treeViewWorkouts;
     private Map<String, Integer> workouts;
     private String selectedMenuItem;
     @FXML
     private TextField workoutName, workoutLength;
     private boolean isNew;
     @FXML
-    protected Button deleteButton;
+    public Button deleteButton;
     @FXML
     private Label labelName, labelLength, hintLabel;
     @FXML
@@ -56,6 +56,7 @@ public class WorkoutsController implements Initializable {
         treeViewWorkouts.setFocusTraversable(false);
         workouts = new LinkedHashMap<>(dataBase.cRud());
         workouts.forEach((name, length) -> workoutsMenu.getChildren().add(new TreeItem<>(name)));
+        treeViewWorkouts.setMaxHeight(4 + treeViewWorkouts.getExpandedItemCount() * 25);
         workoutsMenuPane.getChildren().add(treeViewWorkouts);
         treeViewWorkouts.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             try {
@@ -79,10 +80,16 @@ public class WorkoutsController implements Initializable {
         hintIconA.setVisible(b);
         hintIconB.setVisible(b);
     }
-    public void setUpTabKeyPress(TextField from, TextField to) {
-        from.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+    public void setUpTabKeyPress(TextField tf1, TextField tf2) {
+        tf1.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.TAB) {
-                to.requestFocus();
+                tf2.requestFocus();
+                event.consume();
+            }
+        });
+        tf2.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.TAB) {
+                tf1.requestFocus();
                 event.consume();
             }
         });
@@ -201,6 +208,5 @@ public class WorkoutsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         setUpWorkoutsMenu();
         setUpTabKeyPress(workoutName, workoutLength);
-        setUpTabKeyPress(workoutLength, workoutName);
     }
 }
